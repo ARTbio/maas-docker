@@ -7,7 +7,8 @@ dist: trusty
 before_install:
   - sudo apt-get update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
-  - sudo pip install https://github.com/mvdbeek/maasclient/archive/master.zip
+  - virtualenv venv
+  - pip install https://github.com/mvdbeek/maasclient/archive/master.zip
   - make
 
 script:
