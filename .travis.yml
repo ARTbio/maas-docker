@@ -5,12 +5,10 @@ sudo: required
 dist: trusty
 
 before_install:
-  - docker --version
   - sudo apt-get install -y debian-keyring debian-archive-keyring
   - sudo add-apt-repository -y ppa:maas/stable
   - sudo apt-get update
-  - sudo apt-get install -y python-maas-client docker-engine
-  - docker --version
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y python-maas-client docker-engine
   - make
 
 script:
