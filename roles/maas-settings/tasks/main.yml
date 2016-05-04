@@ -1,0 +1,11 @@
+- name: Create preseed with correct IP
+  template: src=preseed.txt.j2 dest=/tmp/preseed.txt
+
+- name: Set preseed
+  command: debconf-set-selections /tmp/preseed.txt
+
+- name: Reconfigure region and cluster controller
+  command: dpkg-reconfigure maas-cluster-controller maas-region-controller
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+    DEBCONF_NONINTERACTIVE_SEEN: true

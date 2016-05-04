@@ -1,0 +1,33 @@
+# -*- mode: shell-script -*-
+#
+# Control node power through WOL, via `wakeonlan` or `etherwake`.
+# Do the 'off' with ssh shutdown (hack alert)
+#
+
+{% raw %}
+mac_address={{mac_address}}
+ip_address={{ip_address}}
+power_change={{power_change}}
+
+logger mac_address $mac_address, ip_address $ip_address, power_change $power_change
+
+if [ "${power_change}" = 'off' ]
+then
+    logger executing ssh $ip_address -l ubuntu sudo shutdown -h now
+    ssh $ip_address -l ubuntu sudo shutdown -h now
+    logger ssh exited with $?
+elif [ "${power_change}" = 'on' ]
+then
+    if [ -x /usr/sbin/etherwake ]
+    then
+        sudo /usr/sbin/etherwake -i {% endraw %}{{ maas_cluster_eth }}{% raw %} $mac_address
+    else
+        echo "No wakeonlan or etherwake program found." >&2
+    fi
+else
+    echo "There is no way to power down a node through etherwake." >&2
+    exit 1
+fi
+
+exit 0
+{% endraw %}

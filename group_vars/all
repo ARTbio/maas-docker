@@ -1,0 +1,1 @@
+maas_ip: "{{ facter_ipaddress }}"

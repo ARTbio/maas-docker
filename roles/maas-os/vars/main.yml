@@ -1,0 +1,1 @@
+maas_startup_state: "{{ ansible_state_dir }}/maas-region-admin"

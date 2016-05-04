@@ -1,0 +1,4 @@
+NET = ""
+
+ENV = \
+  -e SOME_KEY=SOME_VALUE

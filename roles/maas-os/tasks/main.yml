@@ -1,0 +1,61 @@
+---
+# Install system packages
+# From https://github.com/lgfausak/maas-ansible-playbook/blob/master/roles/maasserver/tasks/main.yml
+
+- file: path={{ ansible_state_dir }} state=directory
+
+- name: Install maas dependencies
+  sudo: True
+  apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=installed install_recommends=yes
+  with_items:
+    - postgresql
+    - apache2
+    - bind9
+    - puppet
+    - rpcbind
+    - chef
+    - resolvconf
+    - rpcbind
+    - rsyslog
+    - software-properties-common
+    - etherwake
+  tags:
+    - install_packages
+
+- name: Update repository
+  sudo: True
+  apt_repository: repo=ppa:maas/stable
+  tags:
+    - install_packages
+
+- name: ensure postgres starts on a fresh reboot
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - postgresql
+    - apache2
+    - bind9
+    - chef-client
+    - puppet
+    - rpcbind
+    - resolvconf
+    - rsyslog
+    - rpcbind
+
+- name: Install MaaS
+  sudo: True
+  apt: name={{ item }} update_cache=yes cache_valid_time=3600 state=installed install_recommends=yes
+  with_items:
+    - maas
+    - maas-dhcp
+    - maas-dns
+  ignore_errors: yes
+  tags:
+    - install_packages
+
+- name: Create Initial Maas Region Admin user
+  sudo: True
+  command: /usr/sbin/maas-region-admin createadmin --username={{ maas_username }} --password={{ maas_password }} --email={{ maas_email }} creates={{ maas_startup_state }}
+
+- name: Create Initial Maas Region Admin user semaphore
+  sudo: True
+  command: creates={{ maas_startup_state }} touch {{ maas_startup_state }}

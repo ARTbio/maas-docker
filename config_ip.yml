@@ -1,0 +1,5 @@
+- name: Configure IP
+  hosts: all
+  vars:
+  roles:
+    - role: maas-settings

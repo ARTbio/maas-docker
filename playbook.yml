@@ -1,0 +1,16 @@
+- name: Install MAAS
+  remote_user: root
+  hosts: all
+  vars:
+    maas_username: maas
+    maas_password: maas
+    maas_email: maas@artbio.fr
+    maas_cluster_eth: eth0
+    node_ip: "{{ hostvars.node_ip }}"
+    ansible_dir: /var/ansible
+    ansible_state_dir: "{{ ansible_dir }}/state"
+    ansible_src_dir: "{{ ansible_dir }}/src"
+    maas_startup_state: "{{ ansible_state_dir }}/maas-region-admin"
+  roles:
+    - role: maas-os
+    - role: maasetherwakehack

@@ -1,0 +1,7 @@
+- name: hack on etherwake
+  sudo: True
+  template: src=ether_wake.template.j2 dest=/etc/maas/templates/power/ether_wake.template
+
+- name: modify sudoers for maas
+  sudo: True
+  template: src=99-maas-sudoers.j2 dest=/etc/sudoers.d/99-maas-sudoers mode="u=r,g=r" owner="root" group="root"

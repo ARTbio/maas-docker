@@ -1,0 +1,2 @@
+maas_url: "{{ maas_ip }}/MAAS"
+maas_ip: 127.0.0.1

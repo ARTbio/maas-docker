@@ -1,0 +1,13 @@
+maas ALL= NOPASSWD: /usr/sbin/service maas-dhcpd start
+maas ALL= NOPASSWD: /usr/sbin/service maas-dhcpd status
+maas ALL= NOPASSWD: /usr/sbin/service maas-dhcpd restart
+maas ALL= NOPASSWD: /usr/sbin/service maas-dhcpd stop
+maas ALL= NOPASSWD: /usr/sbin/service maas-dhcpd6 start
+maas ALL= NOPASSWD: /usr/sbin/service maas-dhcpd6 status
+maas ALL= NOPASSWD: /usr/sbin/service maas-dhcpd6 restart
+maas ALL= NOPASSWD: /usr/sbin/service maas-dhcpd6 stop
+maas ALL= NOPASSWD: /usr/sbin/service tgt status
+maas ALL= NOPASSWD: /usr/sbin/service tgt start
+maas ALL= NOPASSWD: /usr/sbin/maas-provision
+maas ALL= NOPASSWD: SETENV: /usr/sbin/tgt-admin, /usr/bin/uec2roottar
+maas ALL= NOPASSWD: /usr/sbin/etherwake
