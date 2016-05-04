@@ -1,0 +1,14 @@
+---
+language: python
+python: "2.7"
+sudo: required
+dist: trusty
+
+before_install:
+
+  - make
+
+script:
+  - docker network create --subnet=192.168.1.0/24 net1
+  - make run -e NET=net1 && sleep 120s
+  - make test_api_access

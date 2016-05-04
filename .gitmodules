@@ -1,3 +1,0 @@
-[submodule "roles/ansible-role-debian-backports"]
-	path = roles/ansible-role-debian-backports
-	url = https://github.com/jnv/ansible-role-debian-backports.git
