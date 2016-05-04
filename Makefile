@@ -37,7 +37,7 @@ get_ip_address:
 test_api_access:
 	make get_api_key
 	make get_ip_address
-	python3 maas_api_test.py --api_key `cat api_key.txt` --api_url http://`cat ip.txt`/MAAS/api/1.0 | grep "version"
+	python maas_api_test.py --api_key `cat api_key.txt` --api_url http://`cat ip.txt`/MAAS/api/1.0 | grep "version"
 
 persistent_volumes:
 
