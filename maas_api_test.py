@@ -1,13 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import argparse
-from apiclient import maas_client
+from maasclient.auth import MaasAuth
+from maasclient import MaasClient
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--api_key")
 parser.add_argument("--api_url")
 args = parser.parse_args()
 
-
-auth = maas_client.MAASOAuth(*args.api_key.split(":"))
-client = maas_client.MAASClient(auth, maas_client.MAASDispatcher(), args.api_url)
-print(client.get(u"version/").read())
+auth = MaasAuth(api_url=args.api_url, api_key=args.api_key)
+maas_client = MaasClient(auth)
+print(maas_client.server_hostname)
