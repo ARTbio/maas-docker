@@ -15,3 +15,9 @@ script:
   - docker network create --subnet=192.168.1.0/24 net1
   - make run -e NET=net1 && sleep 120s
   - make test_api_access
+
+deploy:
+  provider: script
+  script: make push DOCKER_PASSWORD=$DOCKER_PASSWORD
+  on:
+    branch: master

@@ -16,7 +16,11 @@ build:
 	make stop
 	make rm
 	docker build -t $(NS)/$(REPO):$(VERSION) volumes
+login:
+	@docker login -e=$(DOCKER_EMAIL) -u=$(DOCKER_USERNAME) -p=$(DOCKER_PASSWORD)
+
 push:
+	make login
 	docker push $(NS)/$(REPO):$(VERSION)
 
 commit:

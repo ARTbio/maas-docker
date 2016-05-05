@@ -1,4 +1,7 @@
 NET = ""
 
+DOCKER_EMAIL = artbio.ibps@gmail.com
+DOCKER_USERNAME = artbio
+
 ENV = \
   -e SOME_KEY=SOME_VALUE

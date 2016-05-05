@@ -1,5 +1,7 @@
 Docker MaaS
 ----
+[![Build Status](https://travis-ci.org/ARTbio/maas-docker.svg?branch=master)](https://travis-ci.org/ARTbio/maas-docker)
+
 
 This repo contains a Dockerfile and an ansible playbook to build a Docker image
 with Canonical's MaaS. The build procedure is a little different from usual Dockerfiles,
