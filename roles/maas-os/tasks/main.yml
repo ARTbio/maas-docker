@@ -52,6 +52,12 @@
   tags:
     - install_packages
 
+- name: Install libvirt-bin
+  apt: name=libvirt-bin state=installed install_recommends=no
+
+- name: Set maas home directory
+  user: name=maas home=/var/lib/maas
+
 - name: Create Initial Maas Region Admin user
   sudo: True
   command: /usr/sbin/maas-region-admin createadmin --username={{ maas_username }} --password={{ maas_password }} --email={{ maas_email }} creates={{ maas_startup_state }}
