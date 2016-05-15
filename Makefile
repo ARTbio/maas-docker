@@ -30,7 +30,7 @@ shell:
 	docker exec -i -t $(NAME)-$(INSTANCE) /bin/bash
 
 run:
-	docker run -d --net $(NET) --privileged --name $(NAME)-$(INSTANCE) $(ENV) $(NS)/$(REPO):$(VERSION)
+	docker run -d --net $(NET) --ip=192.168.1.2 --privileged --name $(NAME)-$(INSTANCE) $(ENV) $(NS)/$(REPO):$(VERSION)
 
 get_api_key:
 	docker exec $(NAME)-$(INSTANCE)  maas-region-admin apikey --username maas > api_key.txt
@@ -53,7 +53,7 @@ delete_persistent_volumes:
 
 run_persistent:
 
-	docker run -d --net $(NET) --restart=always --privileged --volumes-from maas_persistent_data --name $(NAME)-$(INSTANCE) $(ENV) $(NS)/$(REPO):$(VERSION)
+	docker run -d --net net1 --ip=192.168.1.2 --restart=always --privileged --volumes-from maas_persistent_data --name $(NAME)-$(INSTANCE) $(ENV) $(NS)/$(REPO):$(VERSION)
 
 stop:
 	docker stop $(NAME)-$(INSTANCE)

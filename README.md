@@ -30,7 +30,12 @@ If you want to boot pysical nodes with MaaS create a docker network that contain
 Assuming your physical network is on the 192.168.1.0/24 subnet, create a new docker network with
 
 ```
-docker network create --subnet=192.168.1.0/24 net1
+docker network create -d macvlan \
+    --subnet=192.168.1.0/24 \
+    --gateway=192.168.1.253  \
+    --aux-address="exclude_host=192.168.1.1" \
+    -o parent=eth1 \
+    net1
 ```
 
 The network net1 will then show up in the list of docker networks:
@@ -43,18 +48,6 @@ f1013ec4aa62        host                    host
 094a5738492a        net1                    bridge              
 a9c220157a01        none                    null                
 9ff0cc43cec6        sentrycompose_default   bridge  
-```
-and in the list of bridges:
-```
-$ brctl show
-bridge name	bridge id		STP enabled	interfaces
-br-094a5738492a		8000.0242ea91311f	no		eth1
-```
-
-You can add physical devices (e.g. eth0) by typing
-
-```
-brctl addif br-094a5738492a eth0
 ```
 
 Now stop the running container and start a new container inside the newly created docker container:
